@@ -28,3 +28,25 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def recipes(requests, dish):
+    context = {}
+    recipe = {}
+    servings = requests.GET.get('servings')
+    if dish in DATA.keys():
+        for k, v in DATA[dish].items():
+            if servings:
+                try:
+                    servings = float(servings)
+                    recipe[k] = v * servings
+                except ValueError:
+                    recipe[k] = v
+                    print('Введено не число')
+            else:
+                recipe[k] = v
+        context['recipe'] = recipe
+        return render(requests, 'index.html', context)
+
+
+
