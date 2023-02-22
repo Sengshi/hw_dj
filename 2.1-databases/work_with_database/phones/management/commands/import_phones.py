@@ -9,9 +9,25 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
+        # temp_list = []
         with open('phones.csv', 'r') as file:
             phones = list(csv.DictReader(file, delimiter=';'))
 
         for phone in phones:
             # TODO: Добавьте сохранение модели
-            pass
+            Phone.objects.create(
+                name=phone['name'],
+                price=phone['price'],
+                image=phone['image'],
+                release_date=phone['release_date'],
+                lte_exists=phone['lte_exists'],
+            )
+            # print(phone)
+            # temp_list.append(Phone(
+            #     name=phone['name'],
+            #     price=phone['price'],
+            #     image=phone['image'],
+            #     release_date=phone['release_date'],
+            #     lte_exists=phone['lte_exists'],
+            # ))
+        # Phone.objects.bulk_create(temp_list)
