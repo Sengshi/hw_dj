@@ -1,4 +1,3 @@
-from django.db.models import Prefetch
 from rest_framework import serializers
 
 from .models import Product, StockProduct, Stock
